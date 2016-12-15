@@ -1,0 +1,27 @@
+{
+  "name": "integration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "iconfont": " node bin/iconfont/iconfont.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.20.0",
+    "babel-loader": "^6.2.9",
+    "babel-preset-env": "^1.0.2",
+    "breakpoint-sass": "^2.7.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^3.0.0",
+    "gulp-twig": "^0.7.0",
+    "susy": "^2.2.12",
+    "webfonts-generator": "^0.3.5",
+    "webpack": "^2.1.0-beta.27",
+    "webpack-stream": "^3.2.0"
+  }
+}

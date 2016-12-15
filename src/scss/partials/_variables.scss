@@ -1,0 +1,60 @@
+//=====================================================
+//  Animations
+//=====================================================
+$duration: 0.3s;
+
+//=====================================================
+//  Breakpoints
+//=====================================================
+$screen-s-min: 640px;
+$screen-m-min: 768px;
+$screen-l-min: 1024px;
+$screen-xl-min: 1250px; // xl = extra-large
+$screen-menu-desktop: 900px;
+
+//=====================================================
+//  Colors
+//=====================================================
+// Categories
+$color-main: #FF4848;
+$color-main-2: #313131;
+// Basics
+$black: #313131;
+$white: #ffffff;
+$grey: #EEEEEE;
+$grey-dark: darken($grey, 15%);
+
+// Errors
+$color-error-blue: #3498db;
+$color-error-green: #65d269;
+$color-error-red: #ff374d;
+$color-error-orange: #feaa2b;
+
+// Socials
+$color-facebook: #3b5998;
+$color-twitter: #55acee;
+$color-instagram: #517fa4;
+$color-google-plus: #dd4b39;
+$color-pinterest: #cb2027;
+
+//=====================================================
+//  Fonts
+//=====================================================
+// Famillies
+$font-main: 'Open Sans' ,Helvetica, sans-serif;
+$font-icon: 'icon'; // In gulpfile: iconfont task
+
+// Sizes
+$font-size-default: 14px !default;
+$font-size-extra-small: 10px;
+$font-size-small: 12px;
+$font-size-base: $font-size-default;
+$font-size-middle-small: 18px;
+$font-size-middle: 26px;
+$font-size-big: 42px;
+
+// weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;

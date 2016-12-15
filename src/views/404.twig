@@ -1,0 +1,24 @@
+{% extends 'base.twig' %}
+
+{% block title %} {{ parent() }} {% endblock %}
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+
+    <div class="page-error">
+        <img class="page-error_logo" src="http://fakeimg.pl/250x100/">
+        <p class="page-error_code">code erreur 404</p>
+        <p class="page-error_title">Page introuvable</p>
+        <p class="page-error_message">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid,
+            doloremque eaque explicabo facilis fugit harum incidunt iusto
+            laboriosam laborum minus molestiae necessitatibus
+            nisi qui quidem quos repudiandae veniam vitae, voluptatum.
+        </p>
+        <p>
+            <a href="" class="page-error_btn" title="Retour à la page d'accueil"> Retour au site </a>
+        </p>
+    </div>
+
+{% endblock content %}
