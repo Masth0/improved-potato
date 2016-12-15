@@ -1,12 +1,12 @@
 {
-  "name": "integration",
+  "name": "boilerplate",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "iconfont": " node bin/iconfont/iconfont.js"
   },
-  "author": "",
+  "author": "Masth0",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.20.0",
