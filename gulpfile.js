@@ -6,6 +6,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var twig = require('gulp-twig');
 var gulpWebpack = require('webpack-stream');
 var webpack = require('webpack');
+var favicons = require("gulp-favicons"); 
 
 /*---- Paths -----------------------------------------------------------------------*/
 var root = './';
@@ -94,6 +95,29 @@ gulp.task('sass', function() {
 	    }))
 		.pipe(gulp.dest(folder.css))
 	  	.pipe(connect.reload());
+});
+
+/*---- Favicon -----------------------------------------------------------------------*/
+gulp.task("favicon", function () {
+    return gulp.src("./src/assets/favicon/favicon.png").pipe(favicons({
+        appName: "My App",
+        appDescription: "",
+        developerName: "",
+        developerURL: "",
+        background: "#020307",
+        path: "./dist/images/favicon",
+        url: "./dist/images/favicon",
+        display: "standalone",
+        orientation: "portrait",
+        start_url: "/?homescreen=1",
+        version: 1.0,
+        logging: false,
+        online: false,
+        html: "index.html",
+        pipeHTML: true,
+        replace: true
+    }))
+    .pipe(gulp.dest("./dist/images/favicon"));
 });
 
 /*---- Watch -----------------------------------------------------------------------*/

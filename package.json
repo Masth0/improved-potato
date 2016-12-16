@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "iconfont": " node bin/iconfont/iconfont.js"
+    "iconfont": "node bin/iconfont/iconfont.js",
+    "favicon": "node bin/favicon/favicon.js"
   },
   "author": "Masth0",
   "license": "ISC",
@@ -13,9 +14,11 @@
     "babel-loader": "^6.2.9",
     "babel-preset-env": "^1.0.2",
     "breakpoint-sass": "^2.7.1",
+    "favicons": "^4.8.3",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-connect": "^5.0.0",
+    "gulp-favicons": "^2.2.7",
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^3.0.0",
     "gulp-twig": "^0.7.0",

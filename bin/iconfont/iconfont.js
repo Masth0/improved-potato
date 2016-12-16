@@ -1,7 +1,7 @@
 var webfontsGenerator = require('webfonts-generator');
 var fs = require('fs');
 
-var dir = 'src/icons/svg';
+var dir = 'src/assets/icons/svg';
 var getFilename = (dir) => {
 	return fs.readdirSync(dir);
 };
