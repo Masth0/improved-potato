@@ -125,8 +125,8 @@ gulp.task('watch', function() {
 	gulp.watch(file.scss, ['sass']);
 	gulp.watch(file.js, ['webpack']);
 	gulp.watch(file.js, ['js']);
-	gulp.watch(file.html, ['html']);
 	gulp.watch(file.views, ['twig']);
+	gulp.watch(file.html, ['html']);
 });
 
 /*---- Default -----------------------------------------------------------------------*/
