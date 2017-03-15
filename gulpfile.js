@@ -4,8 +4,8 @@ var connect = require('gulp-connect');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var twig = require('gulp-twig');
-var gulpWebpack = require('webpack-stream');
-var webpack = require('webpack');
+var webpack2 = require('webpack');
+var webpackGulp = require('gulp-webpack');
 var favicons = require("gulp-favicons"); 
 
 /*---- Paths -----------------------------------------------------------------------*/
@@ -47,11 +47,17 @@ gulp.task('copyJsStatic', function() {
 });
 
 /*---- Webpack -----------------------------------------------------------------------*/
-gulp.task('webpack', function() {
-  return gulp.src(file.js)
-    .pipe(gulpWebpack(require('./webpack.config.js'), webpack))
-    .pipe(gulp.dest('dist/js'));
-});
+// gulp.task('webpack', function() {
+//   return gulp.src(file.js)
+//     .pipe(gulpWebpack(require('./webpack.config.js'), webpack2))
+//     .pipe(gulp.dest('dist/js'));
+// });
+
+	gulp.task('webpack', function() {
+		return gulp.src(file.js)
+			.pipe(webpackGulp(require('./webpack.config.js'), webpack2))
+			.pipe(gulp.dest('dist/js'));
+	});
 
 /*---- Twig -----------------------------------------------------------------------*/
 gulp.task('twig', function () {
