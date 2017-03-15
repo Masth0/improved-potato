@@ -9,7 +9,7 @@ var paths = {
 module.exports = {
   entry: {
     main: paths.src.js + 'main.js',
-    vendor: ['jquery', paths.src.js + 'test.js']
+    //vendor: ['']
   },
   output: {
     filename: '[name].js',
@@ -29,9 +29,9 @@ module.exports = {
       }]
     }]
   },
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor']
-    })
-  ]
+  // plugins: [
+  //   new webpack.optimize.CommonsChunkPlugin({
+  //     names: ['vendor']
+  //   })
+  // ]
 }
