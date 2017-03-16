@@ -1,0 +1,53 @@
+// Navburger
+@include navburger($color-main, #FFF, 0, 0, $screen-menu-desktop);
+
+// Buttons
+%btn {
+  display: inline-block;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: $font-main;
+  font-size: $font-size-middle-small;
+  font-weight: $font-weight-bold;
+  transition-duration: $duration;
+}
+
+.btn-main {
+  @extend %btn;
+  background-color: $color-main;
+  color: $white;
+  i {
+    margin-right: 10px;
+  }
+}
+
+//=====================================================
+//  Map
+//=====================================================
+.btn-zoom_wrapper {
+  //position: absolute;
+  //bottom: 0 !important;
+  //right: 0 !important;
+  //top: auto !important;
+  //left: auto !important;
+}
+
+.btn-map_zoom {
+  font-size: $font-size-middle-small;
+  padding: 20px;
+  background-color: rgba($color-main, 0.9);
+  color: $white;
+  cursor: pointer;
+  transition-duration: $duration;
+  &:hover {
+    background-color: rgba($color-main, 1);
+  }
+}
+
+.btn-map_zoom.in {
+  background-color: rgba($color-main, 0.9);
+  &:hover {
+    background-color: rgba($color-main, 1);
+  }
+}

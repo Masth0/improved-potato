@@ -1,0 +1,293 @@
+//=====================================================
+//  Custom  checkbox || radiobox
+//=====================================================
+/*
+  Le input doit toujours être avant le label !
+  Exemple :
+  <input class="is-hidden" type="checkbox">
+  <label class="label-checkbox-custom for=""> Exemple </label>
+*/
+.checkbox.is-hidden {
+  display: none;
+}
+.label-checkbox_custom:before,
+.label-checkbox_custom {
+  vertical-align: middle;
+}
+
+.label-checkbox_custom {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  padding-left: 25px;
+}
+
+.label-checkbox_custom:before {
+  position: relative;
+  left: -20px;
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: -15px;
+  border: 1px solid;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  font-size: 0;
+  line-height: 30px;
+  background-color: transparent;
+  border-radius: 2px;
+  color: $grey-dark;
+  transition-duration: $duration;
+
+  @media screen and (min-width: $screen-l) {
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    margin-right: -15px;
+  }
+}
+
+.checkbox:checked  + .label-checkbox_custom:before {
+  //@extend %icon-check;
+  font-family: $font-icon;
+  font-size: $font-size-base;
+  background-color: $color-main;
+  border-color: $color-main;
+  color: $white;
+
+  @media screen and (min-width: $screen-l) {
+    font-size: 6px;
+  }
+}
+
+//=====================================================
+//  Custom radio
+//=====================================================
+
+
+//=====================================================
+//  Labels
+//=====================================================
+label {
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+label.required {
+  position: relative;
+  &:before {
+    content: '*';
+    vertical-align: super;
+    color: $color-error-red;
+  }
+}
+
+//=====================================================
+//  Inputs
+//=====================================================
+
+input[type='text'],
+input[type='password'],
+input[type='email'] {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  border: 1px solid $grey-dark;
+}
+
+.input-newsletter,
+input[type='email'].input-newsletter {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  border: none;
+  display: inline-block;
+}
+
+
+//=====================================================
+//  Textarea
+//=====================================================
+textarea {
+  appearance: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  resize: vertical;
+  padding: 0 10px;
+  font-family: $font-main;
+}
+
+//=====================================================
+//  Select
+//=====================================================
+.select_wrapper { // IMPORTANT pour avoir la flêche en :after
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: $white;
+
+  &:after {
+    //@extend %icon-arrow-large-down;
+    font-family: $font-icon;
+    font-size: $font-size-extra-small;
+    color: $color-main;
+    position: absolute;
+    top: 50%;
+    margin-top: -$font-size-extra-small/2;
+    right: 10px;
+    z-index: 0;
+  }
+
+  select {
+    appearance: none;
+    text-indent: 0.01px; // Firefox
+    text-overflow: '';
+    text-transform: uppercase;
+    position: relative;
+    padding: 0 40px 0 20px;
+    height: 40px;
+    line-height: 40px;
+    font-size: $font-size-middle-small;
+    border: 1px solid $grey-dark;
+    background-color: transparent;
+    color: $color-main-2;
+    outline-color: $color-main-2;
+    z-index: 1;
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
+}
+//=====================================================
+//  Error
+//=====================================================
+.form_error {
+  li p {
+    position: relative;
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    @extend .box-error;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 10px;
+      display: block;
+
+      // triangle
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 10px 0 10px;
+      border-color: rgba($color-error-red, 0.2) transparent transparent transparent;
+    }
+  }
+}
+
+//=====================================================
+//  Special input
+//=====================================================
+.field .form_error {
+  p {
+    display: block !important;
+  }
+}
+
+.field {
+  position: relative;
+  height: 80px;
+  padding: 16px 0 0 0;
+}
+
+.field-label {
+  position: relative;
+  margin: 0;
+  display: block;
+
+  color:  $black;
+  line-height: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+
+  transform: translateY(24px);
+  transition: transform 0.3s, color 0.3s;
+  transform-origin: 0 50%;
+}
+
+input.field-input {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 0 5px;
+  border: none;
+  border-color: transparent;
+
+  line-height: 40px;
+  font-size: 16px;
+
+  background: transparent;
+  border: none;
+  -webkit-appearance: none;
+  outline: none;
+  transition-duration: $duration;
+}
+
+.field::after, .field::before {
+  content: '';
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: $grey;
+}
+
+.field::after {
+  background-color: $color-main-2;
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.has-label .field-label {
+  transform: translateY(0) scale(0.75);
+}
+
+.is-focused .field-label{
+  color: $color-main-2;
+}
+.field.is-focused::after {
+  transform: scaleX(1);
+}
+
+// textarea
+.contact_message label {
+  display:block;
+  margin-bottom: 10px;
+  color: $black;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+label.is-focused { color: $color-main-2; }
+textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  height: 300px;
+  resize: vertical;
+  outline: none;
+  border: none;
+  background-color: $grey;
+}
+
+textarea:focus, label:focus {
+  border-color: $color-main-2;
+}

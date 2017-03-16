@@ -1,0 +1,12 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,body {
+  position: relative;
+  width: 100%;
+  font-family: $font-main;
+  font-size: $font-size-base;
+}

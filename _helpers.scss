@@ -1,0 +1,148 @@
+.table { display: table; }
+.va-top { vertical-align: top; }
+.va-middle { vertical-align: middle; }
+.va-bottom { vertical-align: bottom; }
+
+// Texts
+.text-right { text-align: right;}
+.text-left { text-align: left;}
+.text-center { text-align: center;}
+.text-bold { font-weight: 700; }
+
+.text-2-cols {
+  @media screen and (min-width: $screen-m) {
+    column-count: 2;
+  }
+}
+
+.text-3-cols {
+  @media screen and (min-width: $screen-m) {
+    column-count: 2;
+  }
+  @media screen and (min-width: $screen-l) {
+    column-count: 3;
+  }
+}
+
+// Float & clear floats
+.left { float: left; }
+.right { float: right; }
+.clearfix { @include clearfix(); }
+
+// Wrappers
+%max-width {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 20px;
+  @media screen and (min-width: $screen-m) {
+    padding: 0;
+  }
+}
+.max-width, .max-width-small, .max-width-large {
+  @extend %max-width;
+}
+.max-width { max-width: 1024px; }
+.max-width-small { max-width: 660px; }
+.max-width-large { max-width: 1250px; }
+
+@mixin max-width-large () {
+  max-width: 1250px;
+}
+
+// Margins
+.marg { margin: 20px; }
+.marg-x { margin: 0 20px; }
+.marg-y { margin: 20px 0; }
+.marg-top { margin-top: 20px; }
+.marg-right { margin-right: 20px; }
+.marg-top-50 { margin-top: 50px; }
+
+// Padding
+.pad { padding: 20px; }
+.pad-x { padding: 0 20px; }
+.pad-y { padding: 20px 0; }
+.no-pad { padding: 0 !important; }
+
+// List
+.list-inline-block {
+  & > * {
+    display: inline-block;
+  }
+}
+
+// Images
+.img-adapt {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+// Background
+.bg-cover {
+  background: center center no-repeat;
+  background-size: cover;
+}
+
+.is-anim {
+  transition-duration: $duration;
+}
+
+.is-hidden {
+  display: none;
+}
+
+//=====================================================
+//  ToolTips
+//=====================================================
+time[attr="data-tooltip"] {
+  display: inline-block;
+}
+
+[data-tooltip] {
+  position: relative;
+  z-index: 10;
+}
+
+[data-tooltip]:hover:before {
+  z-index: -1;
+  opacity: 1;
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  //border-top: 5px solid rgba($color-main-black, 0.7);
+  border-right: 5px solid transparent;
+  border-bottom: 0 solid transparent;
+  border-left: 5px solid transparent;
+  top: -5px;
+  left: 50%;
+  margin-left: -5px;
+  font-size: $font-size-extra-small;
+  transition-duration: $duration;
+}
+
+[data-tooltip]:hover:after {
+  z-index: -1;
+  opacity: 1;
+  content: attr(data-tooltip);
+  white-space: nowrap;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  font-size: $font-size-extra-small;
+  padding: 5px;
+  text-align: center;
+  transform: translateX(-50%);
+  transition-duration: $duration;
+}
+
+//=====================================================
+//  Labels
+//=====================================================
+.label-box {
+  display: inline-block;
+  padding: 0 5px;
+  font-size: $font-size-extra-small;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+}
