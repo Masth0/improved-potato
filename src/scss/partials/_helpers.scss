@@ -10,16 +10,16 @@
 .text-bold { font-weight: 700; }
 
 .text-2-cols {
-  @media screen and (min-width: $screen-m-min) {
+  @media screen and (min-width: $screen-m) {
     column-count: 2;
   }
 }
 
 .text-3-cols {
-  @media screen and (min-width: $screen-m-min) {
+  @media screen and (min-width: $screen-m) {
     column-count: 2;
   }
-  @media screen and (min-width: $screen-l-min) {
+  @media screen and (min-width: $screen-l) {
     column-count: 3;
   }
 }
@@ -34,7 +34,7 @@
   position: relative;
   margin: 0 auto;
   padding: 0 20px;
-  @media screen and (min-width: $screen-m-min) {
+  @media screen and (min-width: $screen-m) {
     padding: 0;
   }
 }

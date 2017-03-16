@@ -1,6 +1,6 @@
 // Dynamic import 
-// import('b').then(b => {
-//   console.log(b);
+// import('jquery').then($ => {
+//   console.log($);
 // });
 
 // ES6 import

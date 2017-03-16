@@ -41,7 +41,7 @@
   color: $grey-dark;
   transition-duration: $duration;
 
-  @media screen and (min-width: $screen-l-min) {
+  @media screen and (min-width: $screen-l) {
     width: 15px;
     height: 15px;
     line-height: 15px;
@@ -57,7 +57,7 @@
   border-color: $color-main;
   color: $white;
 
-  @media screen and (min-width: $screen-l-min) {
+  @media screen and (min-width: $screen-l) {
     font-size: 6px;
   }
 }

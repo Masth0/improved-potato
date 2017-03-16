@@ -1,6 +1,7 @@
-var webpack = require('webpack');
-var path = require('path');
-var paths = {
+const webpack = require('webpack');
+const path = require('path');
+
+const paths = {
   src: {
     js: __dirname + '/src/js/'
   }
