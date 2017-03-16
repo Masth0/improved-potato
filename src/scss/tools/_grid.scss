@@ -1,5 +1,4 @@
 @import "./node_modules/susy/sass/susy";
-@import "./node_modules/breakpoint-sass/stylesheets/breakpoint";
 
 $columns: 12;
 $gutters: 20px;
@@ -15,53 +14,14 @@ $susy: (
   @include container(auto);
 }
 
-// Generate "fictive class" use with @extend
-// @media screen and (max-width: $screen-s) {
-//   @for $i from 1 through $columns {
-//     %col-xs-#{$i} {
-//       @include span($i);
-//     }
-//   }
-// }
-
-// @media screen and (min-width: $screen-s) {
-//   @for $i from 1 through $columns {
-//     %col-s-#{$i} {
-//       @include span($i);
-//     }
-//   }
-// }
-
-// @include breakpoint(min-width 768px) {
-//   @for $i from 1 through $columns {
-//     %col-m-#{$i} {
-//       @include span($i);
-//     }
-//   }
-// }
-
-// @include breakpoint(min-width 1024px) {
-//   @for $i from 1 through $columns {
-//     %col-l-#{$i} {
-//       @include span($i);
-//     }
-//   }
-// }
-
-// @for $i from 1 through $columns {
-//   %col-#{$i} {
-//     @include span($i);
-//   }
-// }
-
 @mixin shadowGridGenerator($columns, $breakpoint, $prefix) {
   @media screen and (min-width: $breakpoint) {
     @for $i from 1 through $columns {
-      %col-#{$prefix}-#{$i} {
+      %col#{$prefix}-#{$i} {
     @include span($i);
   }
     }
   }
 }
 
-@include shadowGridGenerator(12, $screen-s, 's');
+@include shadowGridGenerator($columns, $screen-s, '-s');
