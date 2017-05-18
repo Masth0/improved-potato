@@ -1,112 +1,82 @@
-var gulp = require('gulp');
-var plumber = require('gulp-plumber'); // Pour les erreurs
-var connect = require('gulp-connect');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var twig = require('gulp-twig');
-var webpack2 = require('webpack');
-var webpackGulp = require('gulp-webpack');
-var favicons = require("gulp-favicons"); 
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const plumber = require('gulp-plumber');
+const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const favicons = require("gulp-favicons");
+const twig = require('gulp-twig');
+const browsersync = require('browser-sync');
 
-/*---- Paths -----------------------------------------------------------------------*/
-var root = './';
+/*---- Config -----------------------------------------------------------------------*/
+browsersync.create(); // create server Browser-sync
 
-var folder = {
-	dist : './dist/',
-	views : root + 'src/views/',
-	js : root + 'src/js/',
-	scss : root + 'src/scss/',
-	icons : root + 'src/icons/',
-	css : root + 'dist/css/',
-	images : root + 'dist/images/',
-	fonts : root + 'dist/fonts/'
+console.log(gutil.env.type);
+
+const config = {
+  env: gutil.env.env || 'dev',
+  port: 8000,
+	appName: "",
+  folder: {
+    dist: './dist',
+    twig: './src/views',
+    js: './src/js',
+    scss: './src/scss',
+    icons: './src/icons',
+    css: './dist/css',
+    images: './dist/images',
+    fonts: './dist/fonts'
+  },
+  files: {
+    twig: './src/views/**/*.twig',
+    scss:  './src/scss/**/*.scss',
+    js: './src/js/**/*.js',
+    jsStatic: './src/js/static/*.js'
+  }
 };
 
-var file = {
-	views : folder.views + '**/*.twig',
-	html : folder.dist + '**/*.html',
-	scss : folder.scss + '**/*.scss',
-	js : folder.js + '**/*.js',
-	jsStatic : folder.js + 'static/*.js',
-	iconsPng : folder.icons + 'png/*.png'
-};
-
-/*---- Connect  -----------------------------------------------------------------------*/
-gulp.task('connect', function() {
-	connect.server({
-		port : 8000,
-		livereload : true
-	});
+/*---- Browser Sync -----------------------------------------------------------------------*/
+gulp.task('browser-sync', function() {
+  browsersync.init({
+     server: {
+			baseDir: "./dist"
+		}
+  })
 });
-
-/*---- Copy static js files -----------------------------------------------------------------------*/
-gulp.task('copyJsStatic', function() {
-  return gulp.src(file.jsStatic)
-    .pipe(gulp.dest('./dist/js/static/'))
-    .pipe(connect.reload());
-});
-
-/*---- Webpack -----------------------------------------------------------------------*/
-// gulp.task('webpack', function() {
-//   return gulp.src(file.js)
-//     .pipe(gulpWebpack(require('./webpack.config.js'), webpack2))
-//     .pipe(gulp.dest('dist/js'));
-// });
-
-	gulp.task('webpack', function() {
-		return gulp.src(file.js)
-			.pipe(webpackGulp(require('./webpack.config.js'), webpack2))
-			.pipe(gulp.dest('dist/js'));
-	});
 
 /*---- Twig -----------------------------------------------------------------------*/
 gulp.task('twig', function () {
-    return gulp.src(file.views)
+    return gulp.src(config.files.twig)
     	.pipe(plumber())
       .pipe(twig())
-      .pipe(gulp.dest(folder.dist))
-      .pipe(connect.reload());
-});
-
-/*---- Html -----------------------------------------------------------------------*/
-gulp.task('html', function() {
-	gulp.src(file.html)
-  .pipe(connect.reload());
-});
-
-/*---- Js -----------------------------------------------------------------------*/
-gulp.task('js', function() {
-	gulp.src(file.js)
-		.pipe(plumber())
-    .pipe(connect.reload());
+      .pipe(gulp.dest('./dist/'));
 });
 
 /*---- Sass -----------------------------------------------------------------------*/
 gulp.task('sass', function() {
-	gulp.src(file.scss) // on cible tous les fichiers scss
+	gulp.src(config.files.scss) // on cible tous les fichiers scss
 		.pipe(plumber())
 		.pipe(sass({
-		  	outputStyle : 'expanded'
+		  	outputStyle: config.env === 'prod' ? 'compressed' : 'expanded'
 		})) // on compile
-	    .pipe(autoprefixer({
-	      browsers : [
-	        'last 2 versions',
-	        'safari 5',
-	        'ie 9',
-	        'opera 12.1',
-	        'ios 6',
-	        'android 4'
-	      ],
-	        cascade: false
-	    }))
-		.pipe(gulp.dest(folder.css))
-	  	.pipe(connect.reload());
+    .pipe(autoprefixer({
+      browsers : [
+        'last 2 versions',
+        'safari 5',
+        'ie 9',
+        'opera 12.1',
+        'ios 6',
+        'android 4'
+      ],
+        cascade: false
+    }))
+  .pipe(gulp.dest(config.folder.css))
+  .pipe(browsersync.reload({stream: true}));
 });
 
 /*---- Favicon -----------------------------------------------------------------------*/
 gulp.task("favicon", function () {
     return gulp.src("./src/assets/favicon/favicon.png").pipe(favicons({
-        appName: "My App",
+        appName: config.appName,
         appDescription: "",
         developerName: "",
         developerURL: "",
@@ -128,12 +98,11 @@ gulp.task("favicon", function () {
 
 /*---- Watch -----------------------------------------------------------------------*/
 gulp.task('watch', function() {
-	gulp.watch(file.scss, ['sass']);
-	gulp.watch(file.js, ['webpack']);
-	gulp.watch(file.js, ['js']);
-	gulp.watch(file.views, ['twig']);
-	gulp.watch(file.html, ['html']);
+	gulp.watch(config.files.scss, ['sass']);
+	gulp.watch(config.files.twig, ['twig']);
+  gulp.watch(config.files.html).on('change', browsersync.reload);
+  gulp.watch('./dist/js/**/*.js').on('change', browsersync.reload);
 });
 
 /*---- Default -----------------------------------------------------------------------*/
-gulp.task('default', ['connect', 'watch']);
+gulp.task('default', ['browser-sync', 'watch']);
