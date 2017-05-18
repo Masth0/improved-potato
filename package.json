@@ -6,7 +6,7 @@
   "scripts": {
     "iconfont": "node bin/iconfont/iconfont.js",
     "start": "concurrently \"gulp\" \"webpack --watch\"",
-    "build": "webpack --optimize & gulp sass --env=prod"
+    "build": "webpack --optimize-minimize & gulp sass --env=prod"
   },
   "author": "Masth0",
   "license": "ISC",
