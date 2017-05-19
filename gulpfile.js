@@ -1,16 +1,12 @@
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 const plumber = require('gulp-plumber');
-const sass = require('gulp-sass');
-const autoprefixer = require('gulp-autoprefixer');
 const favicons = require("gulp-favicons");
 const twig = require('gulp-twig');
 const browsersync = require('browser-sync');
 
 /*---- Config -----------------------------------------------------------------------*/
 browsersync.create(); // create server Browser-sync
-
-console.log(gutil.env.type);
 
 const config = {
   env: gutil.env.env || 'dev',
@@ -27,6 +23,7 @@ const config = {
     fonts: './dist/fonts'
   },
   files: {
+    css: './dist/css/**/*.css',
     twig: './src/views/**/*.twig',
     scss:  './src/scss/**/*.scss',
     js: './src/js/**/*.js',
@@ -49,27 +46,6 @@ gulp.task('twig', function () {
     	.pipe(plumber())
       .pipe(twig())
       .pipe(gulp.dest('./dist/'));
-});
-
-/*---- Sass -----------------------------------------------------------------------*/
-gulp.task('sass', function() {
-	gulp.src(config.files.scss) // on cible tous les fichiers scss
-		.pipe(plumber())
-		.pipe(sass({
-		  	outputStyle: config.env === 'prod' ? 'compressed' : 'expanded'
-		})) // on compile
-    .pipe(autoprefixer({
-      browsers : [
-        'last 2 versions',
-        'safari 5',
-        'opera 12.1',
-        'ios 6',
-        'android 4'
-      ],
-        cascade: false
-    }))
-  .pipe(gulp.dest(config.folder.css))
-  .pipe(browsersync.reload({stream: true}));
 });
 
 /*---- Favicon -----------------------------------------------------------------------*/
@@ -97,9 +73,8 @@ gulp.task("favicon", function () {
 
 /*---- Watch -----------------------------------------------------------------------*/
 gulp.task('watch', function() {
-	gulp.watch(config.files.scss, ['sass']);
 	gulp.watch(config.files.twig, ['twig']);
-  gulp.watch(config.files.html).on('change', browsersync.reload);
+  gulp.watch(config.files.css).on('change', browsersync.reload);
   gulp.watch('./dist/js/**/*.js').on('change', browsersync.reload);
 });
 

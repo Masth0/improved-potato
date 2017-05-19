@@ -1,5 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const autoprefixer = require('autoprefixer');
+
 
 const paths = {
   src: {
@@ -7,10 +10,11 @@ const paths = {
   }
 };
 
-module.exports = {
+/*---- Javascript config -----------------------------------------------------------------------*/
+const JS = {
+  name: 'js',
   entry: {
-    main: paths.src.js + 'main.js',
-    //vendor: ['']
+    main: paths.src.js + '/main.js'
   },
   output: {
     filename: '[name].js',
@@ -29,10 +33,65 @@ module.exports = {
         }
       }]
     }]
+  }
+};
+
+/*---- SCSS / CSS config -----------------------------------------------------------------------*/
+const SCSS = {
+  context: __dirname,
+  name: 'scss',
+  entry: {
+    styles: ['./src/scss/style.scss']
   },
-  // plugins: [
-  //   new webpack.optimize.CommonsChunkPlugin({
-  //     names: ['vendor']
-  //   })
-  // ]
-}
+  output: {
+    filename: 'style.css',
+    path: __dirname + '/dist/css'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        include: /.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          use: [
+            {loader: 'css-loader'},
+            {loader: 'resolve-url-loader'},
+            {loader: 'postcss-loader', options: {
+              plugins: () => {
+                return [
+                  require('autoprefixer')({ browsers: [
+                    'last 2 versions',
+                    'safari 5',
+                    'ie 9',
+                    'opera 12.1',
+                    'ios 6',
+                    'android 4'
+                  ]})
+                ]
+              }
+            }},
+            {loader: 'sass-loader'},
+          ]
+        }),
+      }
+    ]
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: JSON.stringify('production') },
+    }),
+    new ExtractTextPlugin({
+      filename: 'style.css',
+      allChunks: true,
+    })
+  ]
+};
+
+/*---- PLUGINS -----------------------------------------------------------------------*/
+const PLUGINS = [
+  new ExtractTextPlugin("style.css")
+];
+
+/*---- Export -----------------------------------------------------------------------*/
+module.exports = [JS, SCSS];
