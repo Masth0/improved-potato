@@ -1,5 +1,5 @@
 // Navburger
-@include navburger($color-main, #FFF, 0, 0, $screen-menu-desktop);
+@include navburger($screen-menu-desktop);
 
 // Buttons
 %btn {

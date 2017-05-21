@@ -16,12 +16,15 @@ webfontsGenerator({
 	fontName: 'icon',
   files: svg,
   types: ['eot', 'woff', 'ttf', 'svg'],
-  dest: 'dist/fonts',
-  cssFontsUrl: '../fonts',
+  dest: './dist/fonts',
+  cssFontsUrl: '/fonts',
   cssTemplate: 'bin/iconfont/templates/scss.hbs',
   cssDest: 'src/scss/tools/_iconfont.scss',
-  html: true,
-  htmlDest: 'dist/icon.html'
+  html: false,
+  tamplateOption: {
+    classPrefix: 'icon-',
+    baseSelector: '.icon'
+  }
 }, function(error) {
   if (error) console.log('Fail!', error)
   else console.log('Done!')

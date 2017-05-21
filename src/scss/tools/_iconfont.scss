@@ -1,9 +1,9 @@
 @font-face {
 	font-family: "icon";
-	src: url("../fonts/icon.eot?447a51694864dcde2af57a5428380693?#iefix") format("embedded-opentype"),
-url("../fonts/icon.woff?447a51694864dcde2af57a5428380693") format("woff"),
-url("../fonts/icon.ttf?447a51694864dcde2af57a5428380693") format("truetype"),
-url("../fonts/icon.svg?447a51694864dcde2af57a5428380693#icon") format("svg");
+	src: url("/fonts/icon.eot?36d90d87cd0af86bc4c41285f50727cf?#iefix") format("embedded-opentype"),
+url("/fonts/icon.woff?36d90d87cd0af86bc4c41285f50727cf") format("woff"),
+url("/fonts/icon.ttf?36d90d87cd0af86bc4c41285f50727cf") format("truetype"),
+url("/fonts/icon.svg?36d90d87cd0af86bc4c41285f50727cf#icon") format("svg");
 }
 .icon {
 	font-family: "icon";
@@ -723,7 +723,7 @@ $webfont-icons: map-merge($webfont-icons, (
 	}
 }
 
-.icon:before {
+.icon-:before {
 	font-family: icon !important;
 	font-style: normal;
 	font-weight: normal !important;

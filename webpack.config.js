@@ -53,7 +53,7 @@ const SCSS = {
         test: /\.scss$/,
         include: /.scss$/,
         use: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
+          fallback: 'style-loader',
           use: [
             {loader: 'css-loader'},
             {loader: 'resolve-url-loader'},
@@ -89,9 +89,7 @@ const SCSS = {
 };
 
 /*---- PLUGINS -----------------------------------------------------------------------*/
-const PLUGINS = [
-  new ExtractTextPlugin("style.css")
-];
+const PLUGINS = [];
 
 /*---- Export -----------------------------------------------------------------------*/
 module.exports = [JS, SCSS];
