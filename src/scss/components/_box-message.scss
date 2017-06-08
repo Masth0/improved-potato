@@ -7,8 +7,8 @@
 
 $color-box-info: #3498db;
 $color-box-success: #65d269;
-$color-box-warning: #ff374d;
-$color-box-error: #feaa2b;
+$color-box-warning: #feaa2b;
+$color-box-error: #ff374d;
 
 $boxes :
     ('info', $color-box-info), // Premier argument le nom de la classe, ici : box-info
@@ -31,7 +31,7 @@ $boxes :
 
 @each $box in $boxes {
 
-  .box-#{nth($box,1)} {
+  .box-#{nth($box, 1)} {
     @extend %box;
     background-color: rgba(nth($box, 2), 0.2);
     color: darken(nth($box,2), 10%);
@@ -61,3 +61,32 @@ $boxes :
 
   }// end box
 }// end each
+
+
+//=====================================================
+//  Form error
+//=====================================================
+.form_error {
+  li p {
+    position: relative;
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    @extend .box-error;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 10px;
+      display: block;
+
+      // triangle
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 10px 0 10px;
+      border-color: rgba($color-form-error, 0.2) transparent transparent transparent;
+    }
+  }
+}
