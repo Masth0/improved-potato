@@ -1,6 +1,7 @@
 *.idea
 *.vscode
 *.html
+*.lock
 /partials
 /node_modules
 /dist

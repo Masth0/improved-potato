@@ -56,7 +56,6 @@ const SCSS = {
           fallback: 'style-loader',
           use: [
             {loader: 'css-loader'},
-            {loader: 'resolve-url-loader'},
             {loader: 'postcss-loader', options: {
               plugins: () => {
                 return [
@@ -72,6 +71,7 @@ const SCSS = {
               }
             }},
             {loader: 'sass-loader'},
+            {loader: 'resolve-url-loader'},
           ]
         }),
       }

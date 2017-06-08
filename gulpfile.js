@@ -25,7 +25,7 @@ const config = {
   files: {
     css: './dist/css/**/*.css',
     twig: './src/views/**/*.twig',
-    scss:  './src/scss/**/*.scss',
+    scss: './src/scss/**/*.scss',
     js: './src/js/**/*.js',
     jsStatic: './src/js/static/*.js'
   }

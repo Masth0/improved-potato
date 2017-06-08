@@ -18,6 +18,11 @@
         <script>window.html5 || document.write('<script src="js/libs/html5shiv.js"><\/script>')</script>
     <![endif]-->
 
+    {# Browser-sync #}
+	<script id="__bs_script__">//<![CDATA[
+      document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.8'><\/script>".replace("HOST", location.hostname));
+      //]]></script>
+
     {# fonts #}
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 

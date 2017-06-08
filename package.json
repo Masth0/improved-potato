@@ -4,9 +4,9 @@
   "description": "boilerplate front",
   "main": "/",
   "scripts": {
- 	"iconfont": "node bin/iconfont/iconfont.js",
-    "start": "concurrently \"gulp\" \"webpack --watch\"",
-    "build": "rm -r ./dist/ && node bin/iconfont/iconfont.js && webpack --optimize-minimize"
+    "iconfont": "node bin/iconfont/iconfont.js",
+    "start": "concurrently \"gulp\"  \"webpack --watch\"",
+    "build": "node bin/iconfont/iconfont.js && webpack --optimize-minimize"
   },
   "repository": {
     "type": "git",
