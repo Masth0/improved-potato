@@ -1,0 +1,86 @@
+// Functions
+//*
+//* Calcul un % par rapport au context donné
+//* Exemple getPercent(100, 3); ==> 33.3333%
+//*/
+@function getPercent($context, $nbItems) {
+  @return (($context/$nbItems)*1%);
+}
+///*
+//* Converti la valeur de la font PX en EM
+//* $defaultSize = la valeur par default, $targetSize = la valeur ciblée
+//* Exemple :
+//* @pxToEm(14, 14); = base 14px, cible 14px ==> nous donne 1em
+//*/
+@function pxToEm($defaultSize, $targetSize) {
+  @return ($targetSize / $defaultSize) * 1em;
+}
+@function pxToRem($defaultSize, $targetSize) {
+  @return ($targetSize / $defaultSize) * 1rem;
+}
+///*
+//* Change la couleur du texte en fonction de la couleur de fond
+//* exemple : si le fond et noir le texte devient blanc et inversement.
+//*/
+@function contrast($color, $colorLight: #ffffff, $colorDark: #000000) {
+  @if (lightness($color) > 80) {
+      @return $colorDark; // Si le fond est clair
+  } @else {
+      @return $colorLight; // Si le fond est foncé
+  }
+}
+
+
+// ============================================================================= 
+//    Mixins
+// =============================================================================
+// Clearfix
+@mixin clearfix() {
+  *zoom: 1; // pour vieux ie au cas ou
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// Animation Keyframes
+
+@mixin keyframes($animation_name) {
+  @-webkit-keyframes $animation-name {
+    @content;
+  }
+  @-moz-keyframes $animation-name {
+    @content;
+  }
+  @keyframes $animation-name {
+    @content;
+  }
+}
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  animation: #{$str};
+}
+
+//=====================================================
+//  Génération des classes de couleurs
+//=====================================================
+@mixin bgColors($prefix,$colors) {
+  @each $i in $colors {
+    .#{$prefix}-#{nth($colors,1)} {
+      background-color : nth($colors,2);
+    }
+  }
+}
+@mixin txtColors($prefix,$colors) {
+  @each $i in $colors {
+    .#{$prefix}-#{nth($colors,1)} {
+        color : nth($colors,2);
+    }
+  }
+}

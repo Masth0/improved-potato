@@ -17,6 +17,7 @@ $navsteak-color: $white;
 $navsteak-before-color: inherit;
 $navsteak-after-color: inherit;
 
+// mobile first (min-width)
 @mixin navburger($screen-menu-desktop) {
   .navburger {
     position: fixed;
@@ -107,3 +108,6 @@ $navsteak-after-color: inherit;
     transition-delay: $navburger-time-anim /2;
   }
 }
+
+// Generate Navburger
+@include navburger($screen-menu-desktop);

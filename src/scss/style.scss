@@ -1,40 +1,40 @@
-/*--- style.scss ---*/
-@charset 'UTF-8';
+@charset "UTF-8";
 
-@import 'partials/variables';
+//=====================================================
+//  Utils
+//=====================================================
+@import 'utils/variables';
+@import 'utils/functions_mixins';
+@import 'utils/helpers';
 
-@import 'tools/iconfont';
+//=====================================================
+//  Base
+//=====================================================
+@import 'base/reset';
+@import 'base/base';
+@import 'base/iconfont';
 
-@import 'partials/reset';
+//=====================================================
+//  Components
+//=====================================================
+@import 'components/titles';
+@import 'components/navburger';
+@import 'components/buttons';
+@import 'components/forms';
+@import 'components/edit';
+@import 'components/supports';
 
-@import 'tools/functions_mixins';
+//=====================================================
+//  Layout
+//=====================================================
+@import 'layout/grid';
+@import 'layout/_header';
 
-@import 'tools/grid';
+//=====================================================
+//  Themes
+//=====================================================
+@import 'themes/theme';
 
-@import 'partials/navburger';
-
-@import 'partials/helpers';
-
-@import 'tools/iconfont';
-
-@import 'partials/theme';
-
-@import 'partials/typography';
-
-@import 'partials/base';
-
-@import 'partials/animations';
-
-@import 'partials/forms';
-
-@import 'partials/layout';
-
-@import 'partials/modules';
-
-@import 'partials/buttons';
-
-@import 'partials/dev';
-
-@import 'partials/supports';
-
-@import 'partials/shame';
+//=====================================================
+//  Vendors
+//=====================================================

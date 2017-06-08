@@ -1,0 +1,63 @@
+//=====================================================
+//  Box message
+//=====================================================
+/*  Utilisation :
+  <div class="box-succes"> Ici ton message </div>
+*/
+
+$color-box-info: #3498db;
+$color-box-success: #65d269;
+$color-box-warning: #ff374d;
+$color-box-error: #feaa2b;
+
+$boxes :
+    ('info', $color-box-info), // Premier argument le nom de la classe, ici : box-info
+    ('succes', $color-box-success),
+    ('warning', $color-box-warning),
+    ('error', $color-box-error);
+
+// Propriétées communes aux box
+%box {
+  display: block;
+  padding: 10px 20px;
+  font-size: $font-size-base;
+  //border: 1px solid;
+  &:before {
+    font-family: $font-icon;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+}
+
+@each $box in $boxes {
+
+  .box-#{nth($box,1)} {
+    @extend %box;
+    background-color: rgba(nth($box, 2), 0.2);
+    color: darken(nth($box,2), 10%);
+    //border-color: darken(nth($box,2), 10%);
+
+    @if nth($box, 1) == 'info' {
+      @include webfont-icon('info-circle');
+    }
+
+    @if nth($box, 1) == 'succes' {
+      &:before {
+        @extend %icon-check-circle;
+      }
+    }
+
+    @if nth($box, 1) == 'warning' {
+      &:before {
+        @extend %icon-exclamation-triangle;
+      }
+    }
+
+    @if nth($box, 1) == 'error' {
+      &:before {
+        @extend %icon-exclamation-triangle;
+      }
+    }
+
+  }// end box
+}// end each
