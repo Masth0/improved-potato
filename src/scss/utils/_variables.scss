@@ -16,13 +16,30 @@ $screen-menu-desktop: 900px;
 //  Colors
 //=====================================================
 // Categories
-$color-main: #FF4848;
-$color-main-2: #313131;
+$color-main: #35c870;
+$color-main-2: #1aa4e5;
+$color-allianz: #004b8f;
+
 // Basics
-$black: #313131;
+$black: #404040;
 $white: #ffffff;
-$grey: #EEEEEE;
-$grey-dark: darken($grey, 15%);
+$color-grey-light: #eaeaea;
+$color-grey: #8d8d8d;
+$color-grey-dark: #404040;
+$color-red: #fe3450;
+
+// Box alert
+$color-alert-error: $color-red;
+$color-alert-error-light: #fff8f9;
+
+$color-alert-info: $color-main-2;
+$color-alert-info-light: #f4fbff;
+
+$color-alert-success: $color-main;
+$color-alert-success-light: #ecffed;
+
+$color-alert-warning: #feaa2b;
+$color-alert-warning-light: #fff8ed;
 
 // Socials
 $color-facebook: #3b5998;
@@ -39,12 +56,12 @@ $font-main: 'Open Sans' ,Helvetica, sans-serif;
 $font-icon: 'icon'; // In gulpfile: iconfont task
 
 // Sizes
-$font-size-default: 14px !default;
+$font-size-default: 16px !default;
 $font-size-extra-small: 10px;
 $font-size-small: 12px;
 $font-size-base: $font-size-default;
 $font-size-middle-small: 18px;
-$font-size-middle: 26px;
+$font-size-middle: 22px;
 $font-size-big: 42px;
 
 // weights
@@ -52,3 +69,8 @@ $font-weight-light: 300;
 $font-weight-regular: 400;
 $font-weight-semi-bold: 600;
 $font-weight-bold: 700;
+
+//=====================================================
+//  Style
+//=====================================================
+$border-radius: 15px;

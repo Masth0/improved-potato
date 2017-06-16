@@ -5,27 +5,42 @@
   <div class="box-succes"> Ici ton message </div>
 */
 
-$color-box-info: #3498db;
-$color-box-success: #65d269;
-$color-box-warning: #feaa2b;
-$color-box-error: #ff374d;
+$color-box-info: $color-alert-info;
+$color-bg-box-info: $color-alert-info-light;
 
+$color-box-success: $color-alert-success;
+$color-bg-box-success: $color-alert-success-light;
+
+$color-box-warning: $color-alert-warning;
+$color-bg-box-warning: $color-alert-warning-light;
+
+$color-box-error: $color-alert-error;
+$color-bg-box-error: $color-alert-error-light;
+
+// Premier argument le nom de la classe, ici : box-info
 $boxes :
-    ('info', $color-box-info), // Premier argument le nom de la classe, ici : box-info
-    ('succes', $color-box-success),
-    ('warning', $color-box-warning),
-    ('error', $color-box-error);
+    ('info', $color-box-info, $color-bg-box-info),
+    ('success', $color-box-success, $color-bg-box-success),
+    ('warning', $color-box-warning, $color-bg-box-warning),
+    ('error', $color-box-error, $color-bg-box-error);
 
 // Propriétées communes aux box
 %box {
+  position: relative;
   display: block;
-  padding: 10px 20px;
+  padding: 10px 20px 10px 50px;
   font-size: $font-size-base;
-  //border: 1px solid;
+  background-color: #ffebee;
+  border-left: 3px solid;
   &:before {
-    font-family: $font-icon;
-    margin-right: 10px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -8px;
+    text-align: center;
     vertical-align: middle;
+    font-family: $font-icon;
+    width: 40px;
   }
 }
 
@@ -33,15 +48,18 @@ $boxes :
 
   .box-#{nth($box, 1)} {
     @extend %box;
-    background-color: rgba(nth($box, 2), 0.2);
-    color: darken(nth($box,2), 10%);
-    //border-color: darken(nth($box,2), 10%);
+    background-color: nth($box, 3);
+    color: darken(nth($box,2), 0%);
+    border-color: darken(nth($box,2), 0%);
+    line-height: 1.5em;
 
     @if nth($box, 1) == 'info' {
-      @include webfont-icon('info-circle');
+      &:before {
+        @extend %icon-info-circle;
+      }
     }
 
-    @if nth($box, 1) == 'succes' {
+    @if nth($box, 1) == 'success' {
       &:before {
         @extend %icon-check-circle;
       }
@@ -67,12 +85,13 @@ $boxes :
 //  Form error
 //=====================================================
 .form_error {
+  margin-top: 10px;
   li p {
+    @extend .box-error;
     position: relative;
     display: block;
     text-align: left;
     margin-bottom: 10px;
-    @extend .box-error;
 
     &:after {
       content: '';
@@ -86,7 +105,7 @@ $boxes :
       height: 0;
       border-style: solid;
       border-width: 10px 10px 0 10px;
-      border-color: rgba($color-form-error, 0.2) transparent transparent transparent;
+      border-color: $color-alert-error-light transparent transparent transparent;
     }
   }
 }
