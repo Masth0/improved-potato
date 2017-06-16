@@ -5,7 +5,7 @@
   "main": "/",
   "scripts": {
     "iconfont": "node bin/iconfont/iconfont.js",
-    "start": "concurrently \"gulp\"  \"webpack --watch\"",
+    "watch": "concurrently \"gulp\"  \"webpack --watch\"",
     "build": "node bin/iconfont/iconfont.js && webpack --optimize-minimize"
   },
   "repository": {
