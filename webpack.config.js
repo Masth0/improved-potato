@@ -32,16 +32,7 @@ const JS = {
           plugins: ['syntax-dynamic-import', 'transform-runtime']
         }
       }]
-    },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            js: 'babel-loader!eslint-loader'
-          }
-        }
-      }]
+    }]
   }
 };
 
