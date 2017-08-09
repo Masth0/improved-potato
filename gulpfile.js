@@ -25,6 +25,7 @@ const config = {
   files: {
     css: './dist/css/**/*.css',
     twig: './src/views/**/*.twig',
+    html: './dist/**/*.html',
     scss: './src/scss/**/*.scss',
     js: './src/js/**/*.js',
     jsStatic: './src/js/static/*.js'
@@ -74,6 +75,7 @@ gulp.task("favicon", function () {
 /*---- Watch -----------------------------------------------------------------------*/
 gulp.task('watch', function() {
 	gulp.watch(config.files.twig, ['twig']);
+  gulp.watch(config.files.html).on('change', browsersync.reload);
   gulp.watch(config.files.css).on('change', browsersync.reload);
   gulp.watch('./dist/js/**/*.js').on('change', browsersync.reload);
 });

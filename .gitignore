@@ -1,7 +1,6 @@
 *.idea
 *.vscode
 *.html
-yarn.lock
 /partials
 /node_modules
 /dist
