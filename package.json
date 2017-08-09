@@ -49,7 +49,6 @@
     "style-loader": "*",
     "susy": "*",
     "uglifyjs-webpack-plugin": "*",
-    "vue-loader": "^13.0.4",
     "webfonts-generator": "*",
     "webpack": "*",
     "webpack-dev-server": "*"
