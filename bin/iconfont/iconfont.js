@@ -1,7 +1,7 @@
 var webfontsGenerator = require('webfonts-generator');
 var fs = require('fs');
 
-var dir = 'src/assets/icons/svg';
+var dir = 'front/assets/icons/svg';
 var getFilename = (dir) => {
 	return fs.readdirSync(dir);
 };
@@ -16,10 +16,10 @@ webfontsGenerator({
 	fontName: 'icon',
   files: svg,
   types: ['eot', 'woff', 'ttf', 'svg'],
-  dest: './dist/fonts',
+  dest: './web/fonts',
   cssFontsUrl: '/fonts',
   cssTemplate: 'bin/iconfont/templates/scss.hbs',
-  cssDest: 'src/scss/tools/_iconfont.scss',
+  cssDest: 'front/scss/typography/_iconfont.scss',
   html: false,
   tamplateOption: {
     classPrefix: 'icon-',

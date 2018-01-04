@@ -1,20 +1,17 @@
-const webpack = require('webpack');
 const path = require('path');
+const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const autoprefixer = require('autoprefixer');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
+const isDev = process.env.NODE_ENV === 'dev';
 
-const paths = {
-  src: {
-    js: __dirname + '/src/js/'
-  }
-};
-
-/*---- Javascript config -----------------------------------------------------------------------*/
-const JS = {
+// JAVASCRIPT config
+const js = {
   name: 'js',
+  context: path.resolve('./src/js/'),
+  watch: isDev,
   entry: {
-    main: paths.src.js + '/main.js'
+    main: './main.js'
   },
   output: {
     filename: '[name].js',
@@ -22,54 +19,42 @@ const JS = {
     path: __dirname + '/dist/js'
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /(node_modules)/,
-      use: [{
-        loader: 'babel-loader',
-        options: {
-          presets: [['es2015', {modules: false}]],
-          plugins: ['syntax-dynamic-import', 'transform-runtime']
-        }
-      }]
-    }]
-  }
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: [{
+          loader: 'babel-loader',
+        }],
+      }
+    ]
+  },
 };
-
-/*---- SCSS / CSS config -----------------------------------------------------------------------*/
-const SCSS = {
-  context: __dirname,
+// SCSS config
+const scss = {
+  context: path.resolve('./src/scss/'),
   name: 'scss',
+  watch: isDev,
   entry: {
-    styles: ['./src/scss/style.scss']
+    styles: ['./main.scss']
   },
   output: {
-    filename: 'style.css',
+    filename: 'main.css',
     path: __dirname + '/dist/css'
   },
   module: {
     rules: [
       {
         test: /\.scss$/,
-        include: /.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            {loader: 'css-loader'},
+            {loader: 'css-loader', options: {importLoaders: 1, minimize: !isDev}},
             {loader: 'resolve-url-loader'},
             {loader: 'postcss-loader', options: {
-              plugins: () => {
-                return [
-                  require('autoprefixer')({ browsers: [
-                    'last 2 versions',
-                    'safari 5',
-                    'ie 9',
-                    'opera 12.1',
-                    'ios 6',
-                    'android 4'
-                  ]})
-                ]
-              }
+              plugins: (loader) => [
+                require('autoprefixer')()
+              ]
             }},
             {loader: 'sass-loader'}
           ]
@@ -78,18 +63,17 @@ const SCSS = {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify('production') },
-    }),
     new ExtractTextPlugin({
-      filename: 'style.css',
+      filename: 'main.css',
       allChunks: true,
+    }),
+    new BrowserSyncPlugin({
+      host: 'localhost',
+      port: 3000,
+      server: { baseDir: ['dist'] },
+      files: ['*.html.twig', '*.css' , './dist/**/*.js']
     })
   ]
 };
 
-/*---- PLUGINS -----------------------------------------------------------------------*/
-const PLUGINS = [];
-
-/*---- Export -----------------------------------------------------------------------*/
-module.exports = [JS, SCSS];
+module.exports = [js, scss];
