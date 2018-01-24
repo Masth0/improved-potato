@@ -1,16 +1,19 @@
-const config = require('./config');
 const webpack = require('webpack');
-var ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const path = require('path');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+let ENV = process.env.NODE_ENV;
 
-const base = {
-  context: config.context,
-  devtool: config.debug ? 'inline-source-map' : false,
-  watch: config.debug,
-  stats: 'errors-only',
-  entry: config.entry,
+module.exports = {
+  context: path.resolve('./src/'),
+  watch: ENV === 'dev',
+  devtool: 'eval',
+  stats: 'normal',
+  entry: {
+    main: ['./scss/main.scss', './js/main.js']
+  },
   output: {
-    path: config.output.path,
+    path: path.resolve('./dist'),
     chunkFilename: '[name].chunk.js',
     filename: '[name].js',
   },
@@ -19,7 +22,7 @@ const base = {
   },
   module: {
     rules: [
-      // Javascript
+      // JS
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
@@ -33,27 +36,24 @@ const base = {
           use: [
             {loader: 'css-loader'},
             {loader: 'resolve-url-loader'},
-            {loader: 'postcss-loader', options: {
-              plugins: (loader) => [
-                require('autoprefixer')
-              ]
-            }},
-            // SASS-LOADER
+            {loader: 'postcss-loader', 
+              options: {
+                plugins: (loader) => [ require('autoprefixer') ]
+              }
+            },
             {loader: 'sass-loader'}
           ]
         }),
       },
       // FILES
-      {
+      { 
         test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192
-            }
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8192
           }
-        ]
+        }]
       }
     ]
   },
@@ -63,5 +63,3 @@ const base = {
     new ExtractTextPlugin("css/app.css"),
   ]
 };
-
-module.exports = base;
