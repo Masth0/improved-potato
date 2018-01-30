@@ -1,4 +1,4 @@
-## Front-end stater
+## Front-end starter
 Write doc :)
 
 ## Config
