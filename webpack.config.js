@@ -18,7 +18,7 @@ let config = {
   },
   output: {
     path: path.resolve('./dist/build'),
-    filename: ENV === 'dev' ? './js/[name].js' : './js/[name].[hash:8].js',
+    filename: devMode ? './js/[name].js' : './js/[name].[hash:8].js',
   },
   module: {
     rules: [
@@ -52,6 +52,20 @@ let config = {
           }
         ]
       },
+      {
+        test: /\.(ttf|svg|eot|woff)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash:8].[ext]',
+              publicPath: '../fonts',
+              outputPath: './fonts',
+              useRelativePath: false
+            }
+          }
+        ]
+      },
     ]
   },
   plugins: [
@@ -70,7 +84,7 @@ let config = {
   }
 };
 
-if (ENV === 'prod') {
+if (!devMode) {
   config.plugins.unshift(new CleanWebpackPlugin(['./build'], {
     root: path.join(__dirname, './dist'),
     verbose: true,

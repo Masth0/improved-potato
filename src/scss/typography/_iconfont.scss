@@ -1,0 +1,52 @@
+@font-face {
+	font-family: "icon";
+	src: url("fonts/icon.eot?8ddc04e6bb0d7e87595763ea249cab37?#iefix") format("embedded-opentype"),
+url("fonts/icon.woff?8ddc04e6bb0d7e87595763ea249cab37") format("woff"),
+url("fonts/icon.ttf?8ddc04e6bb0d7e87595763ea249cab37") format("truetype"),
+url("fonts/icon.svg?8ddc04e6bb0d7e87595763ea249cab37#icon") format("svg");
+}
+.icon {
+	font-family: "icon";
+}
+
+@if not variable-exists('webfont-icons') {
+	$webfont-icons: () !global;
+}
+
+$webfont-icons: map-merge($webfont-icons, (
+		'500px': ('icon' '\f101'),
+		'adjust': ('icon' '\f102'),
+));
+
+@mixin webfont-icon($name) {
+	line-height: 1;
+
+	$icon: map-get($webfont-icons, $name);
+	&:before {
+		font-family: nth($icon, 1) !important;
+		font-style: normal;
+		font-weight: normal !important;
+		vertical-align: top;
+		content: nth($icon, 2);
+	}
+}
+
+.icon-:before {
+	font-family: icon !important;
+	font-style: normal;
+	font-weight: normal !important;
+	vertical-align: top;
+}
+
+.icon-500px:before {
+	content: "\f101";
+}
+%icon-500px {
+	content: "\f101";
+}
+.icon-adjust:before {
+	content: "\f102";
+}
+%icon-adjust {
+	content: "\f102";
+}

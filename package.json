@@ -6,7 +6,7 @@
   "scripts": {
     "bs": "browser-sync start --config bin/browser-sync/index.js",
     "dev": "cross-env NODE_ENV='dev' webpack",
-    "build": "cross-env NODE_ENV='prod' webpack"
+    "build": "node ./bin/iconfont/iconfont.js & cross-env NODE_ENV='prod' webpack"
   },
   "browserslist": [
     "> 1%",
@@ -39,6 +39,7 @@
     "resolve-url-loader": "^2.3.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
+    "webfonts-generator": "^0.4.0",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.0.13",
     "webpack-manifest-plugin": "^2.0.0-rc.2",
