@@ -1,16 +1,17 @@
 const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ENV = process.env.NODE_ENV;
+const devMode = process.env.NODE_ENV == 'dev';
 
 let config = {
   name: 'Assets',
   context: __dirname,
-  mode: ENV === 'dev' ? 'development' : 'production',
-  watch: ENV === 'dev',
+  mode: devMode ? 'development' : 'production',
+  watch: devMode,
   performance: {
-    hints: ENV === 'prod' ? 'warning' : false,
+    hints: devMode ? false : 'warning',
   },
   entry: {
     app: ['./src/scss/app.scss', './src/js/app.js']
@@ -27,22 +28,15 @@ let config = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
       },
-      // SCSS
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader?sourceMap',
-          use: [
-            {loader: 'css-loader?sourceMap'},
-            {loader: 'postcss-loader',
-              options: {
-                plugins: (loader) => [ require('autoprefixer') ]
-              }
-            },
-            {loader: 'resolve-url-loader'},
-            {loader: 'sass-loader?sourceMap'},
-          ]
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader?sourceMap',
+          'postcss-loader',
+          'resolve-url-loader',
+          'sass-loader?sourceMap'
+        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
@@ -61,12 +55,19 @@ let config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: ENV === 'dev' ? './css/[name].css' : './css/[name].[hash:8].css',
-      allChunks: true,
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: devMode ? './css/[name].css' : './css/[name].[hash:8].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
     }),
     new ManifestPlugin()
-  ]
+  ],
+  optimization: {
+    minimizer: [
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  }
 };
 
 if (ENV === 'prod') {
